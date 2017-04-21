@@ -20,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -36,6 +38,8 @@ public class FXMLDocumentController implements Initializable
     @FXML
     public TextField timeTextField;  //TextField for the car's registration number
     
+    @FXML
+    private ImageView imageView;
     //ArrayList for cars, to save the cars' registration numbers with their times in the race
     public static ArrayList<Car> carArrayList = new ArrayList();
     
@@ -77,13 +81,19 @@ public class FXMLDocumentController implements Initializable
         
     }
     
+    private void loadImage(){
+        Image image = new Image(getClass().getResourceAsStream("carImage.png"));
+        imageView.setImage(image); 
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
-    {
-                
-        
+    {               
         //carsObservableList initialized 
         carsObservableList = FXCollections.observableArrayList();
-    }    
+        loadImage();
+    } 
+    
+
     
 }
