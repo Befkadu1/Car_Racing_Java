@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,9 @@ public class FXMLDocumentController implements Initializable
     
     @FXML
     public TextField carRegNumberTextField;  //TextField for the car's registration number
+    
+    @FXML
+    public Label errorMessage;  //Label to show errors
     
     @FXML
     public TextField timeTextField;  //TextField for the car's registration number
@@ -52,8 +56,8 @@ public class FXMLDocumentController implements Initializable
     private void handleButtonAction(ActionEvent event) throws IOException
     {
         String registrationNumber = carRegNumberTextField.getText();
-        String carTime = timeTextField.getText();
-       // int carTimeInteger = Integer.parseInt(carTime);
+        try {
+            int carTime = Integer.parseInt(timeTextField.getText());
         Car carRacingWinners = new Car(registrationNumber, carTime);
         carArrayList.add(carRacingWinners);
         
@@ -72,13 +76,20 @@ public class FXMLDocumentController implements Initializable
         }*/
         System.out.println("carArrayList " + carsObservableList.get(0).getRegistrationNumber());
         
+        
         //forwarding the scene to "DriverTaxiCheck.fxml" if all the boxes are filled
             Parent root2 = FXMLLoader.load(getClass().getResource("CarRacingResults.fxml"));
             Scene scene = new Scene(root2);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Car racing results");
+            
+       
+        } catch (Exception ex)    {
+            errorMessage.setText("Write int on time box!");
+        }
         
+
     }
     
     private void loadImage(){

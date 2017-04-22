@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -48,6 +50,9 @@ public class CarRacingResultsController implements Initializable
     @FXML
     private TableColumn<Car, String> carTimeColumn;
     
+    @FXML
+    private ImageView imageView;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -59,7 +64,7 @@ public class CarRacingResultsController implements Initializable
         if(FXMLDocumentController.carsObservableList.size()>1){
            winnerCarLabel.setText("The winner is " + FXMLDocumentController.carsObservableList.get(0).getRegistrationNumber()); 
         }
-        
+         loadImage();
         
     }  
     
@@ -75,7 +80,10 @@ public class CarRacingResultsController implements Initializable
         
     }
     
-        
-
+        private void loadImage(){
+        Image image = new Image(getClass().getResourceAsStream("carImage.png"));
+        imageView.setImage(image); 
+    }
+    
     
 }
